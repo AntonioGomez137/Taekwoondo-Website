@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIAM TKD - Corporación Integral de Artes Marciales</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #ffffff;
+        }
+
+        /* Header Principal - Minimalista */
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #d44343 100%);
+            padding: 20px 0;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logos {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        /* Logos del Header - Más limpio */
+        .logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: url('logo.jpg') no-repeat center center;
+            background-size: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            border-color: #dc2626;
+        }
+
+        .header-text {
+            text-align: right;
+            flex: 1;
+            margin-left: 50px;
+        }
+
+        .organization-name {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-shadow: none;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-icon:hover {
+            background-color: #dc2626;
+            border-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Navbar - Minimalista */
+        .navbar {
+            background: #ffffff;
+            padding: 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-top: 3px solid #dc2626;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            padding: 0 30px;
+        }
+
+        .nav-item {
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 18px 25px;
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #dc2626;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover {
+            color: #dc2626;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .nav-link.active {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            width: 80%;
+        }
+
+        /* Dropdown Menu - Más limpio */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 15px 20px;
+            color: #6b7280;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .dropdown-link:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-link:hover {
+            background-color: #f9fafb;
+            color: #dc2626;
+        }
+
+        /* Hero Section - Minimalista */
+        .hero {
+            position: relative;
+            height: 500px;
+            background: url('tkd.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* Welcome Section - Más limpio */
+        .welcome {
+            background-color: #ffffff;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .welcome::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #dc2626);
+            border-radius: 2px;
+        }
+
+        .welcome-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 30px;
+        }
+
+        .welcome-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #4b5563;
+            font-weight: 400;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #dc2626;
+        }
+
+        .highlight-blue {
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        /* Footer - Minimalista */
+        .footer {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            padding: 50px 0;
+            color: white;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        /* Badge de Aniversario - Más simple */
+        .anniversary-badge {
+            width: 180px;
+            height: 180px;
+            background: url('logo.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-info {
+            text-align: right;
+            flex: 1;
+            margin-left: 50px;
+        }
+
+        .footer-org-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-contact {
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .footer-social-icon {
+            width: 42px;
+            height: 42px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-social-icon:hover {
+            background-color: #dc2626;
+            border-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 25px;
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .header-text {
+                margin-left: 0;
+            }
+
+            .organization-name {
+                font-size: 24px;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0 20px;
+            }
+
+            .nav-link {
+                padding: 15px 20px;
+                font-size: 13px;
+            }
+
+            .hero {
+                height: 300px;
+            }
+
+            .welcome {
+                padding: 60px 0;
+            }
+
+            .welcome-container {
+                padding: 0 20px;
+            }
+
+            .welcome-text {
+                font-size: 16px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .footer-info {
+                margin-left: 0;
+            }
+
+            .anniversary-badge {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Animation Effects - Sutiles */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Scroll behavior suave */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Mejoras de accesibilidad */
+        .nav-link:focus,
+        .dropdown-link:focus,
+        .social-icon:focus,
+        .footer-social-icon:focus {
+            outline: 2px solid #dc2626;
+            outline-offset: 2px;
+        }
+
+        /* Hover effects más sutiles */
+        .logo,
+        .anniversary-badge {
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Principal -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logos">
+                <div class="logo"></div>
+            </div>
+            <div class="header-text">
+                <h1 class="organization-name">Corporación Integral de Artes Marciales</h1>
+                <p class="subtitle">Taekwondo - Hapkido</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" title="Twitter" aria-label="Twitter">🐦</a>
+                    <a href="#" class="social-icon" title="Facebook" aria-label="Facebook">📘</a>
+                    <a href="#" class="social-icon" title="Instagram" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-item">
+                <a href="#" class="nav-link">Inicio</a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link active">Quiénes Somos</a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-link">Historia</a>
+                    <a href="#" class="dropdown-link">Visión y Misión</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">Galería</a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">Escuelas</a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- La imagen completa se carga como background-image en el CSS -->
+        <!-- CAMBIAR AQUÍ: Actualiza 'tkd.jpg' con la ruta de tu imagen principal -->
+    </section>
+
+    <!-- Welcome Section -->
+    <section class="welcome">
+        <div class="welcome-container">
+            <p class="welcome-text">
+                Nos complace recibirte en <span class="highlight">Corporación Integral de Artes Marciales CIAM</span>,
+                una institución con sede en <span class="highlight-blue">Villahermosa, Tabasco</span>, dedicada a la enseñanza del Taekwondo con excelencia y compromiso.
+                Durante décadas hemos impulsado el desarrollo físico, mental y emocional de nuestros alumnos, formando campeones
+                dentro y fuera del tatami. Nuestra misión es inspirar disciplina, respeto y superación personal, contribuyendo al
+                crecimiento de cada practicante y dejando huella en nuestra comunidad.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="anniversary-badge">
+                <!-- CAMBIAR AQUÍ: La imagen del logo está definida en el CSS como background-image -->
+            </div>
+            <div class="footer-info">
+                <h3 class="footer-org-name">Corporación Integral de Artes Marciales</h3>
+                <div class="footer-contact">
+                    <p>Av Francisco Javier Mina, Centro Delegación Uno</p>
+                    <p>Villahermosa, Tabasco, C.P. 86250</p>
+                    <p>Correo: example@ciam.com</p>
+                    <p>Tel: +(52) 993-179-2943</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="footer-social-icon" title="Twitter" aria-label="Twitter">🐦</a>
+                    <a href="#" class="footer-social-icon" title="Facebook" aria-label="Facebook">📘</a>
+                    <a href="#" class="footer-social-icon" title="Instagram" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect más sutil
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.15)';
+                navbar.style.borderTop = '3px solid #dc2626';
+            } else {
+                navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+                navbar.style.borderTop = '3px solid #dc2626';
+            }
+        });
+
+        // Active navigation highlighting
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                navLinks.forEach(nl => nl.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Intersection Observer para animaciones sutiles
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe welcome section
+        const welcomeSection = document.querySelector('.welcome');
+        observer.observe(welcomeSection);
+
+        // Dropdown menu con mejor UX
+        document.querySelectorAll('.nav-item').forEach(item => {
+            const dropdown = item.querySelector('.dropdown');
+            if (dropdown) {
+                let timeoutId;
+
+                item.addEventListener('mouseenter', () => {
+                    clearTimeout(timeoutId);
+                    dropdown.style.display = 'block';
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    timeoutId = setTimeout(() => {
+                        dropdown.style.display = 'none';
+                    }, 150);
+                });
+
+                dropdown.addEventListener('mouseenter', () => {
+                    clearTimeout(timeoutId);
+                });
+
+                dropdown.addEventListener('mouseleave', () => {
+                    timeoutId = setTimeout(() => {
+                        dropdown.style.display = 'none';
+                    }, 150);
+                });
+            }
+        });
+
+        // Mejora de accesibilidad para teclado
+        document.querySelectorAll('.nav-item').forEach(item => {
+            const dropdown = item.querySelector('.dropdown');
+            const navLink = item.querySelector('.nav-link');
+            
+            if (dropdown) {
+                navLink.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
