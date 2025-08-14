@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIAM TKD - Corporación Integral de Artes Marciales</title>
+    <title>CIAM TKD - Historia</title>
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -48,7 +48,7 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: url('images/logo.jpg') no-repeat center center;
+            background: url('../images/logo.jpg') no-repeat center center;
             background-size: cover;
             border: 2px solid rgba(255, 255, 255, 0.3);
             transition: transform 0.3s ease, border-color 0.3s ease;
@@ -207,103 +207,29 @@
             color: #dc2626;
         }
 
-        /* Hero Carousel */
+        /* Hero */
         .hero {
             position: relative;
             height: 500px;
-            overflow: hidden;
-        }
-
-        .carousel-container {
-            position: relative;
-            height: 100%;
-        }
-
-        .carousel-slides {
-            position: relative;
-            height: 100%;
-            width: 500%;
-            display: flex;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
-        }
-
-        .slide {
-            width: 20%;
-            height: 100%;
+            background: url('../images/hero5.jpg') no-repeat center center;
             background-size: cover;
-            background-position: center;
-            flex-shrink: 0;
-            position: relative;
         }
 
-        .slide::before {
+        .hero::before {
             content: '';
             position: absolute;
             inset: 0;
             background: rgba(0, 0, 0, 0.35);
         }
 
-        /* Carousel Indicators */
-        .carousel-indicators {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 12px;
-            z-index: 10;
-        }
-
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .indicator.active {
-            background-color: #dc2626;
-            border-color: #dc2626;
-            transform: scale(1.2);
-            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3);
-        }
-
-        .indicator:hover:not(.active) {
-            background-color: rgba(255, 255, 255, 0.7);
-            transform: scale(1.1);
-        }
-
-        /* Progress bar para indicador activo */
-        .indicator.active::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 0.8s ease-in-out;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Welcome Section */
-        .welcome {
+        /* Historia Section */
+        .historia-section {
             background-color: #ffffff;
             padding: 80px 0;
             position: relative;
         }
 
-        .welcome::before {
+        .historia-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -315,17 +241,35 @@
             border-radius: 2px;
         }
 
-        .welcome-container {
-            max-width: 700px;
+        .historia-container {
+            max-width: 900px;
             margin: 0 auto;
-            text-align: center;
             padding: 0 30px;
         }
 
-        .welcome-text {
+        .historia-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 50px;
+        }
+
+        .historia-content {
+            display: grid;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .historia-text {
             font-size: 18px;
             line-height: 1.8;
             color: #4b5563;
+            text-align: justify;
+        }
+
+        .historia-text p {
+            margin-bottom: 25px;
         }
 
         .highlight {
@@ -336,6 +280,27 @@
         .highlight-blue {
             font-weight: 600;
             color: #2563eb;
+        }
+
+        .historia-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 40px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .historia-image:hover {
+            transform: scale(1.02);
+        }
+
+        .historia-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
         }
 
         /* Footer */
@@ -359,7 +324,7 @@
         .anniversary-badge {
             width: 180px;
             height: 180px;
-            background: url('images/logo.jpg') no-repeat center center;
+            background: url('../images/logo.jpg') no-repeat center center;
             background-size: cover;
             border-radius: 50%;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
@@ -501,24 +466,24 @@
             }
 
             .hero {
-                height: 300px;
+                height: 250px;
             }
 
-            .carousel-indicators {
-                bottom: 20px;
-            }
-
-            .indicator {
-                width: 10px;
-                height: 10px;
-            }
-
-            .welcome {
+            .historia-section {
                 padding: 60px 0;
             }
 
-            .welcome-text {
+            .historia-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .historia-text {
                 font-size: 16px;
+            }
+
+            .historia-image img {
+                height: 220px;
             }
 
             .footer-container {
@@ -549,8 +514,8 @@
                 <p class="subtitle">Taekwondo - Hapkido</p>
                 <div class="social-icons">
                     <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/ciamcentral1" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -560,13 +525,13 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-item">
-                <a href="#" class="nav-link active">Inicio</a>
+                <a href="#" class="nav-link">Inicio</a>
             </div>
             <div class="nav-item">
-                <a href="#" class="nav-link">Quiénes Somos</a>
+                <a href="#" class="nav-link active">Quiénes Somos</a>
                 <div class="dropdown">
-                    <a href="pages/historia.html" class="dropdown-link">Nuestra historia</a>
-                    <a href="#" class="dropdown-link">Misión y Visión</a>
+                    <a href="#" class="dropdown-link active">Historia</a>
+                    <a href="#" class="dropdown-link">Visión y Misión</a>
                 </div>
             </div>
             <div class="nav-item">
@@ -575,39 +540,59 @@
             <div class="nav-item">
                 <a href="#" class="nav-link">Escuelas</a>
             </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">Contacto</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero Carousel -->
-    <section class="hero">
-        <div class="carousel-container">
-            <div class="carousel-slides" id="carouselSlides">
-                <div class="slide" style="background-image: url('images/hero1.jpg');"></div>
-                <div class="slide" style="background-image: url('images/hero2.jpg');"></div>
-                <div class="slide" style="background-image: url('images/hero3.jpg');"></div>
-                <div class="slide" style="background-image: url('images/hero4.jpg');"></div>
-                <div class="slide" style="background-image: url('images/hero5.jpg');"></div>
-            </div>
-            <div class="carousel-indicators">
-                <div class="indicator active" data-slide="0"></div>
-                <div class="indicator" data-slide="1"></div>
-                <div class="indicator" data-slide="2"></div>
-                <div class="indicator" data-slide="3"></div>
-                <div class="indicator" data-slide="4"></div>
-            </div>
-        </div>
-    </section>
+    <!-- Hero -->
+    <section class="hero"></section>
 
-    <!-- Welcome -->
-    <section class="welcome">
-        <div class="welcome-container">
-            <p class="welcome-text">
-                Nos complace recibirte en <span class="highlight">Corporación Integral de Artes Marciales CIAM</span>,
-                una institución con sede en <span class="highlight-blue">Villahermosa, Tabasco</span>, dedicada a la enseñanza del Taekwondo con excelencia y compromiso.
-                Durante décadas hemos impulsado el desarrollo físico, mental y emocional de nuestros alumnos, formando campeones
-                dentro y fuera del tatami. Nuestra misión es inspirar disciplina, respeto y superación personal, contribuyendo al
-                crecimiento de cada practicante y dejando huella en nuestra comunidad.
-            </p>
+    <!-- Historia Section -->
+    <section class="historia-section">
+        <div class="historia-container">
+            <h2 class="historia-title">Nuestra Historia</h2>
+            <div class="historia-content">
+                <div class="historia-text">
+                    <p>
+                        La <span class="highlight">Corporación Integral de Artes Marciales CIAM</span> nació en <span class="highlight-blue">1985</span> 
+                        con la visión de crear un espacio dedicado a la enseñanza integral del Taekwondo en 
+                        <span class="highlight-blue">Villahermosa, Tabasco</span>. Fundada por el Maestro Juan Pérez, 
+                        nuestra academia comenzó como un pequeño dojang con apenas diez estudiantes apasionados por las artes marciales.
+                    </p>
+                    
+                    <p>
+                        Durante las primeras décadas, CIAM se consolidó como una institución de referencia en la región, 
+                        formando no solo <span class="highlight">campeones deportivos</span>, sino también ciudadanos íntegros 
+                        que llevan consigo los valores fundamentales del Taekwondo: respeto, disciplina, perseverancia y honor.
+                    </p>
+
+                    <div class="historia-image">
+                        <img src="../images/hero4.jpg" alt="Historia CIAM TKD">
+                    </div>
+
+                    <p>
+                        A lo largo de los años, hemos tenido el honor de formar a más de <span class="highlight">2,000 estudiantes</span>, 
+                        muchos de los cuales han representado a México en competencias nacionales e internacionales. 
+                        Nuestros instructores, todos certificados por la <span class="highlight-blue">World Taekwondo Federation</span>, 
+                        continúan la tradición de excelencia que nos caracteriza.
+                    </p>
+
+                    <p>
+                        Hoy, después de casi cuatro décadas de trayectoria, CIAM sigue siendo pionera en la enseñanza de artes marciales 
+                        en el sureste mexicano. Nuestra metodología combina la <span class="highlight">técnica tradicional coreana</span> 
+                        con enfoques pedagógicos modernos, asegurando que cada alumno desarrolle no solo habilidades físicas, 
+                        sino también fortaleza mental y espiritual.
+                    </p>
+
+                    <p>
+                        Nuestra historia es una historia de <span class="highlight">dedicación, crecimiento y compromiso</span> 
+                        con la comunidad tabasqueña. Cada cinturón otorgado, cada competencia ganada y cada vida transformada 
+                        son testimonio del legado que continuamos construyendo día a día.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -625,8 +610,8 @@
                 </div>
                 <div class="footer-social">
                     <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="footer-social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#" class="footer-social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/ciamcentral1" class="footer-social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="footer-social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="footer-social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -636,136 +621,6 @@
     <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
     </a>
-
-    <script>
-        // Carousel functionality optimizado y corregido
-        const carouselSlides = document.getElementById('carouselSlides');
-        const indicators = document.querySelectorAll('.indicator');
-        const totalSlides = indicators.length;
-        let currentSlide = 0;
-        let slideInterval = null; // Inicializar como null
-
-        // Precargar todas las imágenes para mejor performance
-        const images = [
-            'https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-            'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-            'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80',
-            'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
-        ];
-
-        // Precargar imágenes
-        images.forEach(src => {
-            const img = new Image();
-            img.src = src;
-        });
-
-        // FUNCIÓN PRINCIPAL DE CONTROL DE TIMER
-        function resetSlideshow() {
-            // Primero, SIEMPRE limpiar cualquier timer existente
-            if (slideInterval !== null) {
-                clearInterval(slideInterval);
-                slideInterval = null;
-            }
-            
-            // Luego crear un nuevo timer
-            slideInterval = setInterval(nextSlide, 4000);
-        }
-
-        // Function to show a specific slide
-        function showSlide(index, instant = false) {
-            // Actualizar indicadores
-            indicators.forEach(indicator => indicator.classList.remove('active'));
-            indicators[index].classList.add('active');
-            
-            // Mover el carousel
-            const translateX = -index * 20;
-            if (instant) {
-                carouselSlides.style.transition = 'none';
-                carouselSlides.style.transform = `translateX(${translateX}%)`;
-                carouselSlides.offsetHeight;
-                carouselSlides.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-            } else {
-                carouselSlides.style.transform = `translateX(${translateX}%)`;
-            }
-            
-            currentSlide = index;
-        }
-
-        // Function to go to next slide
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            showSlide(currentSlide);
-        }
-
-        // Add click event listeners to indicators
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                if (index !== currentSlide) {
-                    showSlide(index);
-                    resetSlideshow(); // Usar la nueva función de control
-                }
-            });
-        });
-
-        // Pause/Resume slideshow on hover
-        const carouselContainer = document.querySelector('.carousel-container');
-        carouselContainer.addEventListener('mouseenter', () => {
-            if (slideInterval !== null) {
-                clearInterval(slideInterval);
-                slideInterval = null;
-            }
-        });
-        carouselContainer.addEventListener('mouseleave', () => {
-            resetSlideshow();
-        });
-
-        // Touch support for mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        carouselContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        carouselContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    currentSlide = (currentSlide + 1) % totalSlides;
-                } else {
-                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                }
-                showSlide(currentSlide);
-                resetSlideshow();
-            }
-        }
-
-        // Initialize carousel
-        document.addEventListener('DOMContentLoaded', () => {
-            showSlide(0, true);
-            resetSlideshow();
-        });
-
-        // Handle visibility change
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                if (slideInterval !== null) {
-                    clearInterval(slideInterval);
-                    slideInterval = null;
-                }
-            } else {
-                resetSlideshow();
-            }
-        });
-    </script>
 
 </body>
 </html>
