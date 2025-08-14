@@ -48,11 +48,12 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: url('images/logo.jpg') no-repeat center center;
+            background: url('logo.jpg') no-repeat center center;
             background-size: cover;
             border: 2px solid rgba(255, 255, 255, 0.3);
             transition: transform 0.3s ease, border-color 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
         }
 
         .logo:hover {
@@ -221,23 +222,19 @@
         .carousel-slides {
             position: relative;
             height: 100%;
-            width: 100%;
+            width: 500%;
+            display: flex;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
         }
 
         .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            width: 20%;
             height: 100%;
-            opacity: 0;
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             background-size: cover;
             background-position: center;
-        }
-
-        .slide.active {
-            opacity: 1;
+            flex-shrink: 0;
+            position: relative;
         }
 
         .slide::before {
@@ -362,7 +359,7 @@
         .anniversary-badge {
             width: 180px;
             height: 180px;
-            background: url('images/logo.jpg') no-repeat center center;
+            background: url('logo.jpg') no-repeat center center;
             background-size: cover;
             border-radius: 50%;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
@@ -446,14 +443,50 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .header {
+                padding: 15px 0;
+            }
+
             .header-container {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
+                flex-direction: row;
+                text-align: left;
+                gap: 15px;
+                align-items: center;
+                padding: 0 20px;
+            }
+
+            .logo {
+                width: 80px;
+                height: 80px;
+                margin: 0;
             }
 
             .header-text {
-                margin-left: 0;
+                margin-left: 15px;
+                text-align: left;
+                flex: 1;
+            }
+
+            .organization-name {
+                font-size: 16px;
+                margin-bottom: 4px;
+                line-height: 1.2;
+            }
+
+            .subtitle {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .social-icons {
+                justify-content: flex-start;
+                gap: 8px;
+            }
+
+            .social-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
             }
 
             .nav-container {
@@ -516,8 +549,8 @@
                 <p class="subtitle">Taekwondo - Hapkido</p>
                 <div class="social-icons">
                     <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ciamcentral1" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -533,7 +566,7 @@
                 <a href="#" class="nav-link">Quiénes Somos</a>
                 <div class="dropdown">
                     <a href="#" class="dropdown-link">Historia</a>
-                    <a href="#" class="dropdown-link">Misión y Visión</a>
+                    <a href="#" class="dropdown-link">Visión y Misión</a>
                 </div>
             </div>
             <div class="nav-item">
@@ -542,23 +575,28 @@
             <div class="nav-item">
                 <a href="#" class="nav-link">Escuelas</a>
             </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">Contacto</a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Carousel -->
     <section class="hero">
         <div class="carousel-container">
-            <div class="carousel-slides">
-                <div class="slide active" style="background-image: url('images/hero1.jpg');"></div>
-                <div class="slide" style="background-image: url('images/hero2.jpg');"></div>
-                <div class="slide" style="background-image: url('images/hero3.jpg');"></div>
-                <div class="slide" style="background-image: url('images/hero4.jpg');"></div>
+            <div class="carousel-slides" id="carouselSlides">
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
             </div>
             <div class="carousel-indicators">
                 <div class="indicator active" data-slide="0"></div>
                 <div class="indicator" data-slide="1"></div>
                 <div class="indicator" data-slide="2"></div>
                 <div class="indicator" data-slide="3"></div>
+                <div class="indicator" data-slide="4"></div>
             </div>
         </div>
     </section>
@@ -590,8 +628,8 @@
                 </div>
                 <div class="footer-social">
                     <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="footer-social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" class="footer-social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="footer-social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#" class="footer-social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ciamcentral1" class="footer-social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -603,66 +641,131 @@
     </a>
 
     <script>
-        // Carousel functionality
-        const slides = document.querySelectorAll('.slide');
+        // Carousel functionality optimizado y corregido
+        const carouselSlides = document.getElementById('carouselSlides');
         const indicators = document.querySelectorAll('.indicator');
+        const totalSlides = indicators.length;
         let currentSlide = 0;
-        let slideInterval;
+        let slideInterval = null; // Inicializar como null
+
+        // Precargar todas las imágenes para mejor performance
+        const images = [
+            'https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+            'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+            'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80',
+            'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
+        ];
+
+        // Precargar imágenes
+        images.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        // FUNCIÓN PRINCIPAL DE CONTROL DE TIMER
+        function resetSlideshow() {
+            // Primero, SIEMPRE limpiar cualquier timer existente
+            if (slideInterval !== null) {
+                clearInterval(slideInterval);
+                slideInterval = null;
+            }
+            
+            // Luego crear un nuevo timer
+            slideInterval = setInterval(nextSlide, 4000);
+        }
 
         // Function to show a specific slide
-        function showSlide(index) {
-            // Remove active class from all slides and indicators
-            slides.forEach(slide => slide.classList.remove('active'));
+        function showSlide(index, instant = false) {
+            // Actualizar indicadores
             indicators.forEach(indicator => indicator.classList.remove('active'));
-            
-            // Add active class to current slide and indicator
-            slides[index].classList.add('active');
             indicators[index].classList.add('active');
+            
+            // Mover el carousel
+            const translateX = -index * 20;
+            if (instant) {
+                carouselSlides.style.transition = 'none';
+                carouselSlides.style.transform = `translateX(${translateX}%)`;
+                carouselSlides.offsetHeight;
+                carouselSlides.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            } else {
+                carouselSlides.style.transform = `translateX(${translateX}%)`;
+            }
             
             currentSlide = index;
         }
 
         // Function to go to next slide
         function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
+            currentSlide = (currentSlide + 1) % totalSlides;
             showSlide(currentSlide);
-        }
-
-        // Start automatic slideshow
-        function startSlideshow() {
-            slideInterval = setInterval(nextSlide, 5000); // Change every 4 seconds
-        }
-
-        // Stop automatic slideshow
-        function stopSlideshow() {
-            clearInterval(slideInterval);
         }
 
         // Add click event listeners to indicators
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => {
-                showSlide(index);
-                stopSlideshow();
-                startSlideshow(); // Restart the timer
+                if (index !== currentSlide) {
+                    showSlide(index);
+                    resetSlideshow(); // Usar la nueva función de control
+                }
             });
         });
 
-        // Pause slideshow on hover
+        // Pause/Resume slideshow on hover
         const carouselContainer = document.querySelector('.carousel-container');
-        carouselContainer.addEventListener('mouseenter', stopSlideshow);
-        carouselContainer.addEventListener('mouseleave', startSlideshow);
-
-        // Start the slideshow when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            startSlideshow();
+        carouselContainer.addEventListener('mouseenter', () => {
+            if (slideInterval !== null) {
+                clearInterval(slideInterval);
+                slideInterval = null;
+            }
+        });
+        carouselContainer.addEventListener('mouseleave', () => {
+            resetSlideshow();
         });
 
-        // Handle visibility change (pause when tab is not active)
+        // Touch support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        carouselContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        carouselContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                } else {
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                }
+                showSlide(currentSlide);
+                resetSlideshow();
+            }
+        }
+
+        // Initialize carousel
+        document.addEventListener('DOMContentLoaded', () => {
+            showSlide(0, true);
+            resetSlideshow();
+        });
+
+        // Handle visibility change
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
-                stopSlideshow();
+                if (slideInterval !== null) {
+                    clearInterval(slideInterval);
+                    slideInterval = null;
+                }
             } else {
-                startSlideshow();
+                resetSlideshow();
             }
         });
     </script>
