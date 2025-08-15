@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIAM TKD - Escuelas</title>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #ffffff;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2564eb 10%, #d44343 100%);
+            padding: 20px 0;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logos {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: url('../images/logo.jpg') no-repeat center center;
+            background-size: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            border-color: #dc2626;
+        }
+
+        .header-text {
+            text-align: right;
+            flex: 1;
+            margin-left: 50px;
+        }
+
+        .organization-name {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-icon:hover {
+            background-color: #dc2626;
+            border-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #ffffff;
+            padding: 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            padding: 0 30px;
+        }
+
+        .nav-item {
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 18px 25px;
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #dc2626;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #dc2626;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 15px 20px;
+            color: #6b7280;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .dropdown-link:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-link:hover {
+            background-color: #f9fafb;
+            color: #dc2626;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 400px;
+            background: url('../images/hero2.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        /* Escuelas Section */
+        .escuelas-section {
+            background-color: #ffffff;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .escuelas-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #dc2626);
+            border-radius: 2px;
+        }
+
+        .escuelas-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .escuelas-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 50px;
+        }
+
+        /* Mapa y Lista Container */
+        .map-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            margin-bottom: 60px;
+            height: 500px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .schools-list {
+            background: #f8fafc;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .schools-list h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .school-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .school-item:hover,
+        .school-item.active {
+            border-color: #2563eb;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .school-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .school-address {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .school-phone {
+            font-size: 14px;
+            color: #dc2626;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Cards de Escuelas Detalladas */
+        .schools-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .school-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .school-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .school-card-header {
+            background: linear-gradient(135deg, #2563eb, #dc2626);
+            padding: 25px;
+            color: white;
+            text-align: center;
+        }
+
+        .school-card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .school-card-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .school-card-body {
+            padding: 25px;
+        }
+
+        .school-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .school-detail:last-child {
+            margin-bottom: 0;
+        }
+
+        .school-detail-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .school-detail-content {
+            flex: 1;
+        }
+
+        .school-detail-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .school-detail-value {
+            font-size: 14px;
+            color: #2d3748;
+            line-height: 1.4;
+        }
+
+        .school-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .school-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #f8fafc;
+            color: #4b5563;
+            border: 1px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            background: #f1f5f9;
+            border-color: #d1d5db;
+        }
+
+        /* Custom Leaflet Styles */
+        .custom-popup .leaflet-popup-content-wrapper {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .popup-content {
+            padding: 5px;
+        }
+
+        .popup-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .popup-address {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        .popup-phone {
+            font-size: 13px;
+            color: #dc2626;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .popup-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .popup-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            padding: 50px 0;
+            color: white;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .anniversary-badge {
+            width: 180px;
+            height: 180px;
+            background: url('../images/logo.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-info {
+            text-align: right;
+            flex: 1;
+        }
+
+        .footer-org-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .footer-social-icon {
+            width: 42px;
+            height: 42px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-social-icon:hover {
+            background-color: #dc2626;
+            border-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        /* WhatsApp flotante solo móviles */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        @media (min-width: 768px) {
+            .whatsapp-float {
+                display: none;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .map-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            #map {
+                height: 400px;
+            }
+
+            .schools-list {
+                max-height: none;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 0;
+            }
+
+            .header-container {
+                flex-direction: row;
+                text-align: left;
+                gap: 15px;
+                align-items: center;
+                padding: 0 20px;
+            }
+
+            .logo {
+                width: 80px;
+                height: 80px;
+                margin: 0;
+            }
+
+            .header-text {
+                margin-left: 15px;
+                text-align: left;
+                flex: 1;
+            }
+
+            .organization-name {
+                font-size: 16px;
+                margin-bottom: 4px;
+                line-height: 1.2;
+            }
+
+            .subtitle {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .social-icons {
+                justify-content: flex-start;
+                gap: 8px;
+            }
+
+            .social-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0 15px;
+            }
+
+            .nav-link {
+                padding: 15px 15px;
+                font-size: 13px;
+            }
+
+            .hero {
+                height: 250px;
+            }
+
+            .escuelas-section {
+                padding: 60px 0;
+            }
+
+            .escuelas-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .escuelas-container {
+                padding: 0 20px;
+            }
+
+            .map-container {
+                margin-bottom: 40px;
+            }
+
+            #map {
+                height: 300px;
+            }
+
+            .schools-cards {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .footer-container {
+                text-align: center;
+                flex-direction: column;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logos">
+                <div class="logo"></div>
+            </div>
+            <div class="header-text">
+                <h1 class="organization-name">Corporación Integral de Artes Marciales</h1>
+                <p class="subtitle">Taekwondo - Hapkido</p>
+                <div class="social-icons">
+                    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ciamcentral1" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-item">
+                <a href="../index.html" class="nav-link">Inicio</a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">Quiénes Somos</a>
+                <div class="dropdown">
+                    <a href="../pages/historia.html" class="dropdown-link">Historia</a>
+                    <a href="../pages/MisionVision.html" class="dropdown-link">Visión y Misión</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">Galería</a>
+            </div>
+            <div class="nav-item">
+                <a href="../pages/escuelas.html" class="nav-link active">Escuelas</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero"></section>
+
+    <!-- Escuelas Section -->
+    <section class="escuelas-section">
+        <div class="escuelas-container">
+            <h2 class="escuelas-title">Nuestras Escuelas</h2>
+            
+            <!-- Mapa y Lista -->
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="schools-list">
+                    <h3><i class="fas fa-map-marker-alt"></i> Ubicaciones</h3>
+                    <div id="school-list-items">
+                        <!-- Los items se generarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Detalladas -->
+            <div class="schools-cards" id="schools-cards">
+                <!-- Las cards se generarán dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="anniversary-badge"></div>
+            <div class="footer-info">
+                <h3 class="footer-org-name">Corporación Integral de Artes Marciales</h3>
+                <div class="footer-contact">
+                    <p>Av Francisco Javier Mina, Centro Delegación Uno</p>
+                    <p>Villahermosa, Tabasco, C.P. 86250</p>
+                    <p>Correo: example@ciam.com</p>
+                    <p>Tel: +(52) 993-179-2943</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="footer-social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#" class="footer-social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ciamcentral1" class="footer-social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón flotante WhatsApp para móviles -->
+    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    
+    <script>
+        // Datos de las escuelas
+        const escuelas = [
+            {
+                id: 1,
+                nombre: "CIAM Centro",
+                direccion: "Av Francisco Javier Mina, Centro Delegación Uno",
+                coordenadas: [17.9889, -92.9303],
+                telefono: "993-179-2943",
+                whatsapp: "529931465892",
+                instructor: "Maestro Juan Pérez",
+                horarios: [
+                    "Lunes a Viernes: 16:00 - 20:00",
+                    "Sábados: 9:00 - 13:00"
+                ],
+                especialidades: ["Taekwondo Tradicional", "Hapkido", "Defensa Personal"],
+                establecido: "1985"
+            },
+            {
+                id: 2,
+                nombre: "CIAM Gaviotas",
+                direccion: "Fracc. Gaviotas Norte, Calle Principal #45",
+                coordenadas: [18.0150, -92.9500],
+                telefono: "993-185-7421",
+                whatsapp: "529931857421",
+                instructor: "Maestra Ana López",
+                horarios: [
+                    "Lunes a Viernes: 17:00 - 21:00",
+                    "Sábados: 10:00 - 14:00"
+                ],
+                especialidades: ["Taekwondo Deportivo", "Poomsae", "Combate"],
+                establecido: "1995"
+            },
+            {
+                id: 3,
+                nombre: "CIAM Tamulté",
+                direccion: "Col. Tamulté de las Barrancas, Av. Universidad #123",
+                coordenadas: [17.9650, -92.9100],
+                telefono: "993-162-3890",
+                whatsapp: "529931623890",
+                instructor: "Maestro Carlos Mendoza",
+                horarios: [
+                    "Lunes a Viernes: 15:30 - 19:30",
+                    "Sábados: 8:00 - 12:00"
+                ],
+                especialidades: ["Taekwondo Infantil", "Taekwondo Juvenil", "Adultos"],
+                establecido: "2000"
+            },
+            {
+                id: 4,
+                nombre: "CIAM La Manga",
+                direccion: "Fracc. La Manga I, Calle Reforma #67",
+                coordenadas: [18.0050, -92.8900],
+                telefono: "993-147-2563",
+                whatsapp: "529931472563",
+                instructor: "Maestro Roberto Silva",
+                horarios: [
+                    "Lunes a Viernes: 16:30 - 20:30",
+                    "Sábados: 9:30 - 13:30"
+                ],
+                especialidades: ["Hapkido Tradicional", "Defensa Personal", "Armas Tradicionales"],
+                establecido: "2005"
+            },
+            {
+                id: 5,
+                nombre: "CIAM Tabasco 2000",
+                direccion: "Fracc. Tabasco 2000, Paseo Usumacinta #890",
+                coordenadas: [17.9750, -92.8800],
+                telefono: "993-194-5672",
+                whatsapp: "529931945672",
+                instructor: "Maestra Patricia Ruiz",
+                horarios: [
+                    "Lunes a Viernes: 17:30 - 21:30",
+                    "Sábados: 11:00 - 15:00"
+                ],
+                especialidades: ["Taekwondo Femenino", "Aerokick", "Acondicionamiento"],
+                establecido: "2010"
+            }
+        ];
+
+        // Inicializar mapa
+        let map = L.map('map').setView([17.9889, -92.9303], 12);
+        
+        // Agregar tiles de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Icono personalizado para marcadores
+        const customIcon = L.divIcon({
+            className: 'custom-marker',
+            html: `<div style="background: linear-gradient(135deg, #2563eb, #dc2626); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"><i class="fas fa-fist-raised" style="font-size: 12px;"></i></div>`,
+            iconSize: [30, 30],
+            iconAnchor: [15, 15],
+            popupAnchor: [0, -15]
+        });
+
+        // Arrays para almacenar marcadores y elementos de lista
+        let markers = [];
+        let listItems = [];
+
+        // Función para crear popup content
+        function createPopupContent(escuela) {
+            return `
+                <div class="popup-content">
+                    <div class="popup-title">${escuela.nombre}</div>
+                    <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${escuela.direccion}</div>
+                    <div class="popup-phone"><i class="fas fa-phone"></i> ${escuela.telefono}</div>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=${escuela.coordenadas[0]},${escuela.coordenadas[1]}" 
+                       target="_blank" class="popup-btn">
+                        <i class="fas fa-directions"></i> Cómo llegar
+                    </a>
+                </div>
+            `;
+        }
+
+        // Función para crear item de lista
+        function createListItem(escuela, index) {
+            const item = document.createElement('div');
+            item.className = 'school-item';
+            item.dataset.schoolId = escuela.id;
+            item.innerHTML = `
+                <div class="school-name">${escuela.nombre}</div>
+                <div class="school-address">
+                    <i class="fas fa-map-marker-alt"></i>
+                    ${escuela.direccion}
+                </div>
+                <div class="school-phone">
+                    <i class="fas fa-phone"></i>
+                    ${escuela.telefono}
+                </div>
+            `;
+            
+            item.addEventListener('click', () => {
+                // Remover clase active de todos los items
+                listItems.forEach(li => li.classList.remove('active'));
+                // Agregar clase active al item clickeado
+                item.classList.add('active');
+                
+                // Centrar mapa en la escuela
+                map.setView(escuela.coordenadas, 15);
+                
+                // Abrir popup del marcador
+                markers[index].openPopup();
+            });
+            
+            return item;
+        }
+
+        // Función para crear card detallada
+        function createSchoolCard(escuela) {
+            return `
+                <div class="school-card">
+                    <div class="school-card-header">
+                        <h3 class="school-card-title">${escuela.nombre}</h3>
+                        <p class="school-card-subtitle">Establecido en ${escuela.establecido}</p>
+                    </div>
+                    <div class="school-card-body">
+                        <div class="school-detail">
+                            <div class="school-detail-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="school-detail-content">
+                                <div class="school-detail-label">Dirección</div>
+                                <div class="school-detail-value">${escuela.direccion}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="school-detail">
+                            <div class="school-detail-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="school-detail-content">
+                                <div class="school-detail-label">Instructor Principal</div>
+                                <div class="school-detail-value">${escuela.instructor}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="school-detail">
+                            <div class="school-detail-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="school-detail-content">
+                                <div class="school-detail-label">Horarios</div>
+                                <div class="school-detail-value">
+                                    ${escuela.horarios.map(horario => horario).join('<br>')}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="school-detail">
+                            <div class="school-detail-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="school-detail-content">
+                                <div class="school-detail-label">Especialidades</div>
+                                <div class="school-detail-value">
+                                    ${escuela.especialidades.join(' • ')}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="school-actions">
+                            <a href="https://wa.me/${escuela.whatsapp}?text=Hola%2C%20quiero%20información%20sobre%20la%20escuela%20${encodeURIComponent(escuela.nombre)}" 
+                               target="_blank" class="school-btn btn-primary">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=${escuela.coordenadas[0]},${escuela.coordenadas[1]}" 
+                               target="_blank" class="school-btn btn-secondary">
+                                <i class="fas fa-directions"></i> Ubicación
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Inicializar mapa y elementos
+        function initializeMap() {
+            const schoolListContainer = document.getElementById('school-list-items');
+            const schoolCardsContainer = document.getElementById('schools-cards');
+            
+            escuelas.forEach((escuela, index) => {
+                // Crear marcador
+                const marker = L.marker(escuela.coordenadas, { icon: customIcon })
+                    .addTo(map)
+                    .bindPopup(createPopupContent(escuela), {
+                        className: 'custom-popup',
+                        maxWidth: 250
+                    });
+                
+                markers.push(marker);
+                
+                // Crear item de lista
+                const listItem = createListItem(escuela, index);
+                listItems.push(listItem);
+                schoolListContainer.appendChild(listItem);
+                
+                // Crear card detallada
+                schoolCardsContainer.innerHTML += createSchoolCard(escuela);
+                
+                // Event listener para el marcador
+                marker.on('click', () => {
+                    // Remover clase active de todos los items
+                    listItems.forEach(li => li.classList.remove('active'));
+                    // Agregar clase active al item correspondiente
+                    listItem.classList.add('active');
+                });
+            });
+            
+            // Activar primer item por defecto
+            if (listItems.length > 0) {
+                listItems[0].classList.add('active');
+            }
+        }
+
+        // Función para ajustar vista del mapa a todas las escuelas
+        function fitMapToSchools() {
+            const group = new L.featureGroup(markers);
+            map.fitBounds(group.getBounds().pad(0.1));
+        }
+
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMap();
+            
+            // Ajustar vista después de un pequeño delay
+            setTimeout(() => {
+                fitMapToSchools();
+            }, 500);
+        });
+
+        // Función para manejar redimensionado de ventana
+        window.addEventListener('resize', function() {
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 100);
+        });
+    </script>
+
+</body>
+</html>
