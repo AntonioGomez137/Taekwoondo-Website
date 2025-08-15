@@ -493,7 +493,7 @@
         }
 
         .popup-btn {
-            background: #2563eb;
+            background: #2564eb39;
             color: white;
             border: none;
             padding: 8px 12px;
@@ -501,11 +501,16 @@
             font-size: 12px;
             cursor: pointer;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
         }
 
         .popup-btn:hover {
             background: #1d4ed8;
+            color: white;
+            text-decoration: none;
         }
 
         /* Footer */
@@ -595,7 +600,7 @@
             align-items: center;
             justify-content: center;
             font-size: 28px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             text-decoration: none;
             transition: transform 0.3s ease;
@@ -743,9 +748,12 @@
                 <h1 class="organization-name">Corporación Integral de Artes Marciales</h1>
                 <p class="subtitle">Taekwondo - Hapkido</p>
                 <div class="social-icons">
-                    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/ciamcentral1" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales."
+                        class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#"
+                        class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ciamcentral1" class="social-icon" target="_blank"><i
+                            class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -765,7 +773,7 @@
                 </div>
             </div>
             <div class="nav-item">
-                <a href="#" class="nav-link">Galería</a>
+                <a href="../pages/galeria.html" class="nav-link">Galería</a>
             </div>
             <div class="nav-item">
                 <a href="../pages/escuelas.html" class="nav-link active">Escuelas</a>
@@ -780,7 +788,7 @@
     <section class="escuelas-section">
         <div class="escuelas-container">
             <h2 class="escuelas-title">Nuestras Escuelas</h2>
-            
+
             <!-- Mapa y Lista -->
             <div class="map-container">
                 <div id="map"></div>
@@ -812,22 +820,26 @@
                     <p>Tel: +(52) 993-179-2943</p>
                 </div>
                 <div class="footer-social">
-                    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="footer-social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#" class="footer-social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/ciamcentral1" class="footer-social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales."
+                        class="footer-social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#"
+                        class="footer-social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ciamcentral1" class="footer-social-icon" target="_blank"><i
+                            class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Botón flotante WhatsApp para móviles -->
-    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales."
+        class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Leaflet JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-    
+
     <script>
         // Datos de las escuelas
         const escuelas = [
@@ -910,7 +922,7 @@
 
         // Inicializar mapa
         let map = L.map('map').setView([17.9889, -92.9303], 12);
-        
+
         // Agregar tiles de OpenStreetMap
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -961,20 +973,20 @@
                     ${escuela.telefono}
                 </div>
             `;
-            
+
             item.addEventListener('click', () => {
                 // Remover clase active de todos los items
                 listItems.forEach(li => li.classList.remove('active'));
                 // Agregar clase active al item clickeado
                 item.classList.add('active');
-                
+
                 // Centrar mapa en la escuela
                 map.setView(escuela.coordenadas, 15);
-                
+
                 // Abrir popup del marcador
                 markers[index].openPopup();
             });
-            
+
             return item;
         }
 
@@ -1050,7 +1062,7 @@
         function initializeMap() {
             const schoolListContainer = document.getElementById('school-list-items');
             const schoolCardsContainer = document.getElementById('schools-cards');
-            
+
             escuelas.forEach((escuela, index) => {
                 // Crear marcador
                 const marker = L.marker(escuela.coordenadas, { icon: customIcon })
@@ -1059,17 +1071,17 @@
                         className: 'custom-popup',
                         maxWidth: 250
                     });
-                
+
                 markers.push(marker);
-                
+
                 // Crear item de lista
                 const listItem = createListItem(escuela, index);
                 listItems.push(listItem);
                 schoolListContainer.appendChild(listItem);
-                
+
                 // Crear card detallada
                 schoolCardsContainer.innerHTML += createSchoolCard(escuela);
-                
+
                 // Event listener para el marcador
                 marker.on('click', () => {
                     // Remover clase active de todos los items
@@ -1078,7 +1090,7 @@
                     listItem.classList.add('active');
                 });
             });
-            
+
             // Activar primer item por defecto
             if (listItems.length > 0) {
                 listItems[0].classList.add('active');
@@ -1092,9 +1104,9 @@
         }
 
         // Inicializar cuando se carga la página
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             initializeMap();
-            
+
             // Ajustar vista después de un pequeño delay
             setTimeout(() => {
                 fitMapToSchools();
@@ -1102,7 +1114,7 @@
         });
 
         // Función para manejar redimensionado de ventana
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
             setTimeout(() => {
                 map.invalidateSize();
             }, 100);
@@ -1110,4 +1122,5 @@
     </script>
 
 </body>
+
 </html>

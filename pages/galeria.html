@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIAM TKD - Galería</title>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #ffffff;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2564eb 10%, #d44343 100%);
+            padding: 20px 0;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logos {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: url('../images/logo.jpg') no-repeat center center;
+            background-size: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            border-color: #dc2626;
+        }
+
+        .header-text {
+            text-align: right;
+            flex: 1;
+            margin-left: 50px;
+        }
+
+        .organization-name {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-icon:hover {
+            background-color: #dc2626;
+            border-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #ffffff;
+            padding: 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            padding: 0 30px;
+        }
+
+        .nav-item {
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 18px 25px;
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #dc2626;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #dc2626;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 15px 20px;
+            color: #6b7280;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .dropdown-link:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-link:hover {
+            background-color: #f9fafb;
+            color: #dc2626;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=400&fit=crop&crop=center') no-repeat center center;
+            background-size: cover;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        /* Galería Section */
+        .galeria-section {
+            background-color: #ffffff;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .galeria-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #dc2626);
+            border-radius: 2px;
+        }
+
+        .galeria-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .galeria-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 50px;
+        }
+
+        /* Grid de Eventos */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .event-item {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #e5e7eb;
+            position: relative;
+        }
+
+        .event-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .event-item:hover .event-image {
+            transform: scale(1.05);
+        }
+
+        .event-info {
+            padding: 25px;
+            background: white;
+        }
+
+        .event-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            line-height: 1.4;
+            margin: 0 0 8px 0;
+        }
+
+        .event-date {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .event-photos-count {
+            display: inline-block;
+            background: linear-gradient(135deg, #2563eb, #dc2626);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modal Lightbox */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            width: 90%;
+            max-width: 1200px;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 75%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-caption {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            max-width: 80%;
+        }
+
+        .modal-event-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .modal-counter {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .modal-back-button {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2001;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-3px);
+        }
+
+        /* Controles del Modal */
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            z-index: 2001;
+        }
+
+        .modal-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-nav:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .modal-nav:disabled:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-50%);
+        }
+
+        .modal-prev {
+            left: 30px;
+        }
+
+        .modal-next {
+            right: 30px;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin: 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            padding: 50px 0;
+            color: white;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .anniversary-badge {
+            width: 180px;
+            height: 180px;
+            background: url('../images/logo.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-info {
+            text-align: right;
+            flex: 1;
+        }
+
+        .footer-org-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .footer-social-icon {
+            width: 42px;
+            height: 42px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-social-icon:hover {
+            background-color: #dc2626;
+            border-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        /* WhatsApp flotante solo móviles */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        @media (min-width: 768px) {
+            .whatsapp-float {
+                display: none;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 0;
+            }
+
+            .header-container {
+                flex-direction: row;
+                text-align: left;
+                gap: 15px;
+                align-items: center;
+                padding: 0 20px;
+            }
+
+            .logo {
+                width: 80px;
+                height: 80px;
+                margin: 0;
+            }
+
+            .header-text {
+                margin-left: 15px;
+                text-align: left;
+                flex: 1;
+            }
+
+            .organization-name {
+                font-size: 16px;
+                margin-bottom: 4px;
+                line-height: 1.2;
+            }
+
+            .subtitle {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .social-icons {
+                justify-content: flex-start;
+                gap: 8px;
+            }
+
+            .social-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0 15px;
+            }
+
+            .nav-link {
+                padding: 15px 15px;
+                font-size: 13px;
+            }
+
+            .hero {
+                height: 250px;
+            }
+
+            .galeria-section {
+                padding: 60px 0;
+            }
+
+            .galeria-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .galeria-container {
+                padding: 0 20px;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .event-image {
+                height: 250px;
+            }
+
+            .event-info {
+                padding: 20px;
+            }
+
+            .event-title {
+                font-size: 16px;
+            }
+
+            .event-photos-count {
+                top: 12px;
+                right: 12px;
+            }
+
+            .modal-content {
+                width: 95%;
+                height: 95%;
+            }
+
+            .modal-image {
+                max-height: 65%;
+            }
+
+            .modal-caption {
+                font-size: 16px;
+                margin-top: 15px;
+            }
+
+            .modal-event-title {
+                font-size: 18px;
+            }
+
+            .modal-close {
+                top: 10px;
+                right: 15px;
+                font-size: 28px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .modal-back-button {
+                top: 10px;
+                left: 15px;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .modal-nav {
+                font-size: 20px;
+                padding: 12px 16px;
+            }
+
+            .modal-prev {
+                left: 15px;
+            }
+
+            .modal-next {
+                right: 15px;
+            }
+
+            .footer-container {
+                text-align: center;
+                flex-direction: column;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logos">
+                <div class="logo"></div>
+            </div>
+            <div class="header-text">
+                <h1 class="organization-name">Corporación Integral de Artes Marciales</h1>
+                <p class="subtitle">Taekwondo - Hapkido</p>
+                <div class="social-icons">
+                    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ciamcentral1" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-item">
+                <a href="../index.html" class="nav-link">Inicio</a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">Quiénes Somos</a>
+                <div class="dropdown">
+                    <a href="../pages/historia.html" class="dropdown-link">Historia</a>
+                    <a href="../pages/MisionVision.html" class="dropdown-link">Visión y Misión</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link active">Galería</a>
+            </div>
+            <div class="nav-item">
+                <a href="../pages/escuelas.html" class="nav-link">Escuelas</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero"></section>
+
+    <!-- Galería Section -->
+    <section class="galeria-section">
+        <div class="galeria-container">
+            <h2 class="galeria-title">Galería de Eventos</h2>
+            
+            <!-- Grid de Eventos -->
+            <div class="events-grid" id="events-grid">
+                <!-- Los eventos se generarán dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Lightbox -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-back-button" id="modal-back">
+                <i class="fas fa-arrow-left"></i>
+                Volver a eventos
+            </button>
+            <span class="modal-close" id="modal-close">&times;</span>
+            <button class="modal-nav modal-prev" id="modal-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="modal-nav modal-next" id="modal-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <img class="modal-image" id="modal-image" src="" alt="">
+            <div class="modal-caption">
+                <div class="modal-event-title" id="modal-event-title"></div>
+                <div class="modal-counter" id="modal-counter"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="anniversary-badge"></div>
+            <div class="footer-info">
+                <h3 class="footer-org-name">Corporación Integral de Artes Marciales</h3>
+                <div class="footer-contact">
+                    <p>Av Francisco Javier Mina, Centro Delegación Uno</p>
+                    <p>Villahermosa, Tabasco, C.P. 86250</p>
+                    <p>Correo: example@ciam.com</p>
+                    <p>Tel: +(52) 993-179-2943</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="footer-social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/ciam.tabasco?mibextid=wwXIfr&rdid=0TuyIvUHtIpFXmfw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1PEma4N3my%2F%3Fmibextid%3DwwXIfr#" class="footer-social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ciamcentral1" class="footer-social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón flotante WhatsApp para móviles -->
+    <a href="https://wa.me/529931465892?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20academia%20de%20artes%20marciales." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Datos de los eventos con múltiples fotos cada uno (usando imágenes de stock)
+        const eventsData = [
+            {
+                titulo: "Examen de Grados Cinturones Negros",
+                fecha: "Diciembre 2024",
+                imagenPrincipal: "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=600&h=400&fit=crop&crop=center",
+                fotos: [
+                    "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1594736797933-d0301ba6fe65?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&h=600&fit=crop&crop=center"
+                ]
+            },
+            {
+                titulo: "Torneo Estatal de Taekwondo",
+                fecha: "Octubre 2024",
+                imagenPrincipal: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&crop=center",
+                fotos: [
+                    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1594736797933-d0301ba6fe65?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1609575094429-4cfdf4c9ab67?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=800&h=600&fit=crop&crop=center"
+                ]
+            },
+            {
+                titulo: "Seminario de Hapkido con Maestros Coreanos",
+                fecha: "Septiembre 2024",
+                imagenPrincipal: "../images/hero6.jpg",
+                fotos: [
+                    "https://images.unsplash.com/photo-1594736797933-d0301ba6fe65?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1609575094429-4cfdf4c9ab67?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&crop=center"
+                ]
+            },
+            {
+                titulo: "Competencia Nacional Juvenil",
+                fecha: "Agosto 2024",
+                imagenPrincipal: "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=600&h=400&fit=crop&crop=center",
+                fotos: [
+                    "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1609575094429-4cfdf4c9ab67?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1594736797933-d0301ba6fe65?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1609575188944-2826b7e50bb9?w=800&h=600&fit=crop&crop=center"
+                ]
+            },
+            {
+                titulo: "Celebración 39 Aniversario CIAM",
+                fecha: "Julio 2024", 
+                imagenPrincipal: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&h=400&fit=crop&crop=center",
+                fotos: [
+                    "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1609575188944-2826b7e50bb9?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1594736797933-d0301ba6fe65?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&crop=center"
+                ]
+            },
+            {
+                titulo: "Demostración en Festival Cultural de Tabasco",
+                fecha: "Junio 2024",
+                imagenPrincipal: "../images/hero6.jpg",
+                fotos: [
+                    "https://images.unsplash.com/photo-1609575094429-4cfdf4c9ab67?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1609575188944-2826b7e50bb9?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800&h=600&fit=crop&crop=center"
+                ]
+            },
+            {
+                titulo: "Curso de Defensa Personal para Mujeres",
+                fecha: "Mayo 2024",
+                imagenPrincipal: "../images/hero6.jpg",
+                fotos: [
+                    "https://images.unsplash.com/photo-1609575188944-2826b7e50bb9?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1594736797933-d0301ba6fe65?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&h=600&fit=crop&crop=center"
+                ]
+            },
+            {
+                titulo: "Torneo Interclubes Regional",
+                fecha: "Abril 2024",
+                imagenPrincipal: "https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=600&h=400&fit=crop&crop=center",
+                fotos: [
+                    "https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1609575094429-4cfdf4c9ab67?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&crop=center",
+                    "https://images.unsplash.com/photo-1594736797933-d0301ba6fe65?w=800&h=600&fit=crop&crop=center"
+                ]
+            }
+        ];
+
+        let currentEventIndex = 0;
+        let currentImageIndex = 0;
+        let isModalOpen = false;
+        let currentEvent = null;
+
+        // Elementos del DOM
+        const modal = document.getElementById('modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalEventTitle = document.getElementById('modal-event-title');
+        const modalCounter = document.getElementById('modal-counter');
+        const modalClose = document.getElementById('modal-close');
+        const modalBack = document.getElementById('modal-back');
+        const modalPrev = document.getElementById('modal-prev');
+        const modalNext = document.getElementById('modal-next');
+        const eventsGrid = document.getElementById('events-grid');
+
+        // Generar grid de eventos
+        function generateEventsGrid() {
+            eventsData.forEach((evento, index) => {
+                const eventItem = document.createElement('div');
+                eventItem.className = 'event-item';
+                eventItem.innerHTML = `
+                    <div class="event-photos-count">${evento.fotos.length} fotos</div>
+                    <img src="${evento.imagenPrincipal}" alt="${evento.titulo}" class="event-image">
+                    <div class="event-info">
+                        <h3 class="event-title">${evento.titulo}</h3>
+                        <p class="event-date">${evento.fecha}</p>
+                    </div>
+                `;
+                
+                eventItem.addEventListener('click', () => openEventModal(index));
+                eventsGrid.appendChild(eventItem);
+            });
+        }
+
+        // Abrir modal de evento
+        function openEventModal(eventIndex) {
+            currentEventIndex = eventIndex;
+            currentImageIndex = 0;
+            currentEvent = eventsData[eventIndex];
+            isModalOpen = true;
+            updateModalContent();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Cerrar modal
+        function closeModal() {
+            isModalOpen = false;
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentEvent = null;
+        }
+
+        // Actualizar contenido del modal
+        function updateModalContent() {
+            if (!currentEvent) return;
+            
+            const currentImage = currentEvent.fotos[currentImageIndex];
+            modalImage.src = currentImage;
+            modalImage.alt = `${currentEvent.titulo} - Foto ${currentImageIndex + 1}`;
+            modalEventTitle.textContent = currentEvent.titulo;
+            modalCounter.textContent = `Foto ${currentImageIndex + 1} de ${currentEvent.fotos.length}`;
+            
+            // Actualizar estado de botones de navegación
+            modalPrev.disabled = currentImageIndex === 0;
+            modalNext.disabled = currentImageIndex === currentEvent.fotos.length - 1;
+        }
+
+        // Navegación entre imágenes del evento actual
+        function nextImage() {
+            if (currentEvent && currentImageIndex < currentEvent.fotos.length - 1) {
+                currentImageIndex++;
+                updateModalContent();
+            }
+        }
+
+        function prevImage() {
+            if (currentEvent && currentImageIndex > 0) {
+                currentImageIndex--;
+                updateModalContent();
+            }
+        }
+
+        // Event listeners
+        modalClose.addEventListener('click', closeModal);
+        modalBack.addEventListener('click', closeModal);
+        modalNext.addEventListener('click', nextImage);
+        modalPrev.addEventListener('click', prevImage);
+
+        // Cerrar modal al hacer clic fuera de la imagen
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (!isModalOpen) return;
+            
+            switch(e.key) {
+                case 'Escape':
+                    closeModal();
+                    break;
+                case 'ArrowLeft':
+                    prevImage();
+                    break;
+                case 'ArrowRight':
+                    nextImage();
+                    break;
+            }
+        });
+
+        // Soporte para gestos táctiles en móvil
+        let startX = 0;
+        let endX = 0;
+        let startY = 0;
+        let endY = 0;
+
+        modalImage.addEventListener('touchstart', (e) => {
+            startX = e.changedTouches[0].screenX;
+            startY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        modalImage.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].screenX;
+            endY = e.changedTouches[0].screenY;
+            
+            const differenceX = startX - endX;
+            const differenceY = startY - endY;
+            
+            // Solo procesar swipes horizontales (evitar conflicto con scroll vertical)
+            if (Math.abs(differenceX) > Math.abs(differenceY) && Math.abs(differenceX) > 50) {
+                if (differenceX > 0) {
+                    nextImage(); // Swipe left = next
+                } else {
+                    prevImage(); // Swipe right = prev
+                }
+            }
+        }, { passive: true });
+
+        // Error handling para imágenes
+        modalImage.addEventListener('error', () => {
+            console.log('Error cargando imagen, usando placeholder');
+            modalImage.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0yMDAgMTUwTDE2MCA5MEwyNDAgOTBMMjAwIDE1MFoiIGZpbGw9IiM5Q0EzQUYiLz4KPGNpcmNsZSBjeD0iMTcwIiBjeT0iMTIwIiByPSIxMCIgZmlsbD0iIzlDQTNBRiIvPgo8dGV4dCB4PSIyMDAiIHk9IjE4MCIgZmlsbD0iIzlDQTNBRiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5JbWFnZW4gbm8gZGlzcG9uaWJsZTwvdGV4dD4KPC9zdmc+';
+        });
+
+        // Precargar imágenes del evento para navegación más fluida
+        function preloadEventImages(eventIndex) {
+            const event = eventsData[eventIndex];
+            if (!event) return;
+            
+            event.fotos.forEach(imageSrc => {
+                const img = new Image();
+                img.src = imageSrc;
+            });
+        }
+
+        // Precargar imagen siguiente y anterior del evento actual
+        function preloadAdjacentImages() {
+            if (!currentEvent) return;
+            
+            const nextIndex = currentImageIndex + 1;
+            const prevIndex = currentImageIndex - 1;
+            
+            if (nextIndex < currentEvent.fotos.length) {
+                const nextImg = new Image();
+                nextImg.src = currentEvent.fotos[nextIndex];
+            }
+            
+            if (prevIndex >= 0) {
+                const prevImg = new Image();
+                prevImg.src = currentEvent.fotos[prevIndex];
+            }
+        }
+
+        // Lazy loading para las imágenes principales de eventos
+        function setupLazyLoading() {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                            imageObserver.unobserve(img);
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.01
+            });
+
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            lazyImages.forEach(img => imageObserver.observe(img));
+        }
+
+        // Inicializar la aplicación
+        function initializeApp() {
+            generateEventsGrid();
+            setupLazyLoading();
+            
+            // Precargar imágenes de los primeros eventos
+            eventsData.slice(0, 3).forEach((_, index) => {
+                preloadEventImages(index);
+            });
+        }
+
+        // Mejorar la experiencia de navegación con precarga inteligente
+        function updateModalContentWithPreload() {
+            updateModalContent();
+            preloadAdjacentImages();
+        }
+
+        // Reemplazar las llamadas de navegación para incluir precarga
+        function nextImageWithPreload() {
+            nextImage();
+            preloadAdjacentImages();
+        }
+
+        function prevImageWithPreload() {
+            prevImage();
+            preloadAdjacentImages();
+        }
+
+        // Actualizar los event listeners para usar las funciones con precarga
+        modalNext.removeEventListener('click', nextImage);
+        modalPrev.removeEventListener('click', prevImage);
+        modalNext.addEventListener('click', nextImageWithPreload);
+        modalPrev.addEventListener('click', prevImageWithPreload);
+
+        // Prevenir zoom accidental en móvil
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Mejorar rendimiento del scroll
+        let ticking = false;
+        function updateOnScroll() {
+            // Aquí puedes agregar efectos de scroll personalizados si los necesitas
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateOnScroll);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Animaciones de entrada para los elementos
+        function animateOnScroll() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            const eventItems = document.querySelectorAll('.event-item');
+            eventItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(item);
+            });
+        }
+
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            
+            // Pequeño delay para las animaciones de entrada
+            setTimeout(() => {
+                animateOnScroll();
+            }, 300);
+        });
+
+        // Manejar cambios de orientación en móvil
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                if (isModalOpen) {
+                    updateModalContent();
+                }
+            }, 100);
+        });
+
+        // Optimización de memoria: limpiar imágenes precargadas cuando no se necesiten
+        window.addEventListener('beforeunload', () => {
+            // Limpiar event listeners y referencias
+            if (isModalOpen) {
+                closeModal();
+            }
+        });
+
+    </script>
+
+</body>
+</html>
